@@ -144,6 +144,11 @@ typedef struct {
 } __attribute__((packed)) Sieve_obj_params_t;
 
 typedef struct {
+  uint8_t physical_bucket;  // Ring bucket index or RINGLFU_ZERO_BUCKET sentinel
+  uint8_t placed_version;   // Bucket version when item was placed
+} __attribute__((packed)) RingLFU_obj_metadata_t;
+
+typedef struct {
   int64_t next_access_vtime;
   int32_t freq;
 } __attribute__((packed)) misc_metadata_t;
@@ -191,6 +196,7 @@ typedef struct cache_obj {
     S3FIFO_obj_metadata_t S3FIFO;
     Sieve_obj_params_t sieve;
     CAR_obj_metadata_t CAR;
+    RingLFU_obj_metadata_t RingLFU;
 
 #if defined(ENABLE_GLCACHE) && ENABLE_GLCACHE == 1
     GLCache_obj_metadata_t GLCache;

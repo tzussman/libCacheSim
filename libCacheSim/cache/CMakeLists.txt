@@ -50,6 +50,7 @@ set(eviction_sources_c
         eviction/Random.c
         eviction/RandomLRU.c
         eviction/RandomTwo.c
+        eviction/RingLFU.c
         eviction/S3FIFO.c
         eviction/Sieve.c
         eviction/Size.c
